@@ -13,6 +13,7 @@ where
 import Data.WAVE
 
 type Rate = Int
+
 type Sample = Double
 
 data Sound = MkMonoSound Rate [Sample] | MkStereoSound Rate [Sample] [Sample]
@@ -31,11 +32,13 @@ getSound file stereo = do
 
 createWave :: Sound -> WAVE
 createWave (MkMonoSound rate samples) = WAVE header samps
-  where header = WAVEHeader 1 rate 16 $ Just $ length samples
-        samps = map (\x -> [doubleToSample x]) samples
+  where
+    header = WAVEHeader 1 rate 16 $ Just $ length samples
+    samps = map (\x -> [doubleToSample x]) samples
 createWave (MkStereoSound rate left right) = WAVE header samps
-  where header = WAVEHeader 2 rate 16 $ Just $ length left
-        samps = zipWith (\a b -> [doubleToSample a, doubleToSample b]) left right
+  where
+    header = WAVEHeader 2 rate 16 $ Just $ length left
+    samps = zipWith (\a b -> [doubleToSample a, doubleToSample b]) left right
 
 writeSound :: String -> Sound -> IO ()
 writeSound file sound = do
@@ -47,30 +50,33 @@ writeSound file sound = do
 -- - Output a new sound containing the samples of the input sound in reverse order, with the same input rate.
 -- -
 backwards :: Sound -> Sound
-backwards = error "Not yet implemented!"
+backwards = error "Not implemented yet!"
 
 -- |
 -- - Mix the two sounds with given ratio
--- - If the two sounds have different rates, output Nothing
+-- - If the two sounds have different rates, or if one of the sounds is a mono sound
+-- - and the other is a stereo sound, output Nothing
 -- -
-mix :: Sound -> Sound -> Float -> Maybe Sound
-mix = error "Not yet implemented!"
+mix :: Sound -> Sound -> Double -> Maybe Sound
+mix = error "Not implemented yet!"
 
 -- |
 -- - Echo the given sound
 -- - Compute a new signal consisting of several scaled-down and delayed version of the input sound.
 -- -
-echo :: Sound -> Int -> Float -> Float -> Sound
-echo = error "Not yet implemented!"
+echo :: Sound -> Int -> Double -> Double -> Sound
+echo = error "Not implemented yet!"
 
 -- |
 -- - If the input is a stereo sound, output Just the panned sound
 -- - Otherwise, output Nothing
 pan :: Sound -> Maybe Sound
-pan = error "Not yet implemented"
+pan = error "Not implemented yet!"
+
 
 -- |
 -- - If the input is a stereo sound, output the sound with vocals removed
 -- = Otherwise, output Nothing
 removeVocals :: Sound -> Maybe Sound
-removeVocals = error "Not yet implemented"
+removeVocals = error "Not implemented yet!"
+

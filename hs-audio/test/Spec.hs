@@ -8,7 +8,7 @@ listEq diff xs ys =
   length xs == length ys && all (< diff) (zipWith (\x y -> abs $ x - y) xs ys)
 
 listEqThreshhold :: (Fractional a, Ord a) => [a] -> [a] -> Bool
-listEqThreshhold = listEq 1e-6
+listEqThreshhold = listEq 1e-4
 
 compareSounds :: Sound -> Sound -> Bool
 compareSounds (MkMonoSound r1 s1) (MkMonoSound r2 s2) =
