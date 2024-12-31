@@ -21,12 +21,7 @@ data Sound = MkMonoSound Rate [Sample] | MkStereoSound Rate [Sample] [Sample]
 getSound :: String -> Bool -> IO Sound
 getSound file stereo = do
   WAVE header samples <- getWAVEFile file
-  let WAVEHeader chan sr alwaysSixteen count = header
-  putStrLn $ "chan: " ++ show chan
-  putStrLn $ "sr: " ++ show sr
-  putStrLn $ "alwaysSixteen: " ++ show alwaysSixteen
-  putStrLn $ "count: " ++ show count
-  putStrLn $ "Length of samples: " ++ show (length samples)
+  let WAVEHeader chan sr _ _ = header
   let rate = sr
   let left = map (sampleToDouble . head) samples
   let right = map (sampleToDouble . (if chan == 2 then last else head)) samples
