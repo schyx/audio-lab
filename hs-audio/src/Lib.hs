@@ -73,10 +73,8 @@ echo = error "Not implemented yet!"
 pan :: Sound -> Maybe Sound
 pan = error "Not implemented yet!"
 
-
 -- |
 -- - If the input is a stereo sound, output the sound with vocals removed
 -- = Otherwise, output Nothing
 removeVocals :: Sound -> Maybe Sound
 removeVocals = error "Not implemented yet!"
-

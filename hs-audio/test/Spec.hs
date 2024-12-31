@@ -96,7 +96,7 @@ unitTests =
           Nothing -> assertFailure "Expected something, got Nothing."
           Just res -> testSounds expected res,
       testCaseSteps "Remove vocals of mono sound" $ \_ -> do
-        let result = removeVocals $ MkMonoSound 10 [-5..4]
+        let result = removeVocals $ MkMonoSound 10 [-5 .. 4]
         case result of
           Nothing -> return ()
           Just _ -> assertFailure "Expected Nothing, got something",
